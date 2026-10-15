@@ -1,5 +1,28 @@
 # @effect/sql-sqlite-react-native
 
+## 4.0.6
+
+### Patch Changes
+
+- [#9222](https://github.com/Effect-TS/effect/pull/9222) [`5a67e0b`](https://github.com/Effect-TS/effect/commit/5a67e0b3a8118dd7be709a56d6d7af4f10e9c4f3) Thanks @effect-bot! - Fix `SqlRunnerStorage` hanging on PGlite.
+  
+  `SqlClient` now has a `driver` field identifying the driver that created it, such as `"pg"`, `"pglite"` or `"sqlite-node"`. Every Effect SQL driver sets it. On PGlite, runner storage no longer reserves the only connection and uses lock table rows instead of advisory locks, so runner and application queries are no longer blocked.
+  
+  Third-party drivers must pass a `driver` name to `SqlClient.make`, and hand-written `SqlClient` implementations must provide a `driver` field:
+  
+  ```ts
+  const make = Effect.gen(function*() {
+    return yield* SqlClient.make({
+      driver: "my-driver",
+      acquirer,
+      compiler,
+      spanAttributes: []
+    })
+  })
+  ```
+- Updated dependencies [[`bfb32a3`](https://github.com/Effect-TS/effect/commit/bfb32a3cf5f8d0f02f0dfdb63dcf5237fde755b0), [`ac68940`](https://github.com/Effect-TS/effect/commit/ac68940f7e4246b1beb43f9d451a67f41241ab82), [`7f504a3`](https://github.com/Effect-TS/effect/commit/7f504a35edcf44952c55ecbb0916726bac4d3e52), [`cc00906`](https://github.com/Effect-TS/effect/commit/cc0090657eeb89debdd54af5fcb99d544f46c1bf), [`09ba1f5`](https://github.com/Effect-TS/effect/commit/09ba1f59952c46cd22229d41236742c3e1f53a34), [`14db221`](https://github.com/Effect-TS/effect/commit/14db221f8f584100ff50fd1173b1a99a1caa1d06), [`1e7909b`](https://github.com/Effect-TS/effect/commit/1e7909beb05bc740dbd330509e60bb185d7eeed1), [`a049d4a`](https://github.com/Effect-TS/effect/commit/a049d4ad25f17cf4985284a8d15b07aea2a33242), [`00261cc`](https://github.com/Effect-TS/effect/commit/00261cc12c31ecc7878f80670439731c905dc2bd), [`7cccb93`](https://github.com/Effect-TS/effect/commit/7cccb9385729bc0aed6630edea95d7db15439ac4), [`8037a65`](https://github.com/Effect-TS/effect/commit/8037a65f40cae9163ab9e0e687e289f717ae570b), [`0386f88`](https://github.com/Effect-TS/effect/commit/0386f88295ac70cbc1f90ab8cceb0981d848c628), [`403298a`](https://github.com/Effect-TS/effect/commit/403298ac457fb634eca2c013fed26d37fc80445f), [`5a3ebc0`](https://github.com/Effect-TS/effect/commit/5a3ebc082124f9e10106b2347736e66fc74ebc36), [`c3983f4`](https://github.com/Effect-TS/effect/commit/c3983f4db2b3052a58e8045cce270fd7ccc4e2b2), [`f0e941e`](https://github.com/Effect-TS/effect/commit/f0e941ee2f90f0a891d1228a90da91386f0258cb), [`e9c842b`](https://github.com/Effect-TS/effect/commit/e9c842bc294abf658d698bb17732ae13465b3817), [`8fbb39e`](https://github.com/Effect-TS/effect/commit/8fbb39eb92577915831f19a83b51be376e844613), [`7886b84`](https://github.com/Effect-TS/effect/commit/7886b847658664f64392a14efda86f44b3d1e170), [`4839c60`](https://github.com/Effect-TS/effect/commit/4839c601bdda845d9a54d77f578f64372475ab04), [`425cedb`](https://github.com/Effect-TS/effect/commit/425cedb5801c9527c116a64d280d9e7c2820f922), [`973d599`](https://github.com/Effect-TS/effect/commit/973d599a3e8611626764a0e3e8f79edbcf30dc7c), [`2f066a5`](https://github.com/Effect-TS/effect/commit/2f066a58e90316dd88a219fcea94200beda54219), [`5a67e0b`](https://github.com/Effect-TS/effect/commit/5a67e0b3a8118dd7be709a56d6d7af4f10e9c4f3), [`11bb31f`](https://github.com/Effect-TS/effect/commit/11bb31fec0bf2fdfc025009a04de4c69bffa433a), [`9c96011`](https://github.com/Effect-TS/effect/commit/9c960111de202c0f1dd6989e5b8836150e0ca694), [`3ec8100`](https://github.com/Effect-TS/effect/commit/3ec8100c793b8a22381ad115106b93824d840f64), [`1e94993`](https://github.com/Effect-TS/effect/commit/1e949935a1065e5140245a514ce3a799061143e3), [`191308b`](https://github.com/Effect-TS/effect/commit/191308bd0f5ee04557570f2f960c6e06c429bcfd), [`4b96570`](https://github.com/Effect-TS/effect/commit/4b96570ed28d93b14e958742933d227dc5e74b15), [`9a5331d`](https://github.com/Effect-TS/effect/commit/9a5331db94bfdca4f48317d062fbeb96054a9049), [`da33572`](https://github.com/Effect-TS/effect/commit/da33572776763e45802ce8c2fe14ec101f9a5c34), [`0dbbea6`](https://github.com/Effect-TS/effect/commit/0dbbea65a93c59147a4bc407cfcda38ea26341b2)]:
+  - effect@4.0.6
+
 ## 4.0.5
 
 ### Patch Changes
